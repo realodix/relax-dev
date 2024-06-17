@@ -4,7 +4,10 @@ namespace Realodix\Relax\RuleSet;
 
 final class RuleSet
 {
-    private array|string|RuleSetInterface $ruleSet;
+    /**
+     * @var array|string|RuleSetInterface
+     */
+    private $ruleSet;
 
     /**
      * @param array|string|RuleSetInterface $ruleSet
