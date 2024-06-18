@@ -40,7 +40,7 @@ class RuleSetTest extends TestCase
     public function testRuleSetName(): void
     {
         $expected = '@'.$this->getClassShortName(new RuleSetFile);
-        $actual = (new RuleSetFile)->getName();
+        $actual = (new RuleSetFile)->name();
 
         $this->assertSame($expected, $actual);
     }
@@ -51,8 +51,8 @@ class RuleSetTest extends TestCase
      */
     public function testRuleSetNameWithoutSetName(): void
     {
-        $expected = (new RuleSetWithSetNameFile)->name;
-        $actual = (new RuleSetWithSetNameFile)->getName();
+        $expected = (new RuleSetWithSetNameFile)->name().' (0 rules)';
+        $actual = Config::create(new RuleSetWithSetNameFile)->getName();
 
         $this->assertSame($expected, $actual);
     }

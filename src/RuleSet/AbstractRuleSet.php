@@ -4,16 +4,10 @@ namespace Realodix\Relax\RuleSet;
 
 abstract class AbstractRuleSet implements RuleSetInterface
 {
-    protected string $name = '';
-
     abstract public function rules(): array;
 
-    public function getName(): string
+    public function name(): string
     {
-        if ($this->name !== '') {
-            return $this->name;
-        }
-
         return '@'.self::classBasename($this);
     }
 
