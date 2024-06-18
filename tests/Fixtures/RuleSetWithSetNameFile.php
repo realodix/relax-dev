@@ -8,7 +8,7 @@ final class RuleSetWithSetNameFile extends AbstractRuleSet
 {
     public function name(): string
     {
-        return 'valid-rule-set-name';
+        return '@CustomRuleSetName';
     }
 
     public function rules(): array
