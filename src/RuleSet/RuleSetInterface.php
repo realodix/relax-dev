@@ -12,5 +12,5 @@ interface RuleSetInterface
     /**
      * Returns an array of rules along with their configuration
      */
-    public function getRules(): array;
+    public function rules(): array;
 }

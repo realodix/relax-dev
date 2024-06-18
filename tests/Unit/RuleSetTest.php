@@ -21,7 +21,7 @@ class RuleSetTest extends TestCase
     {
         $reflect = new \ReflectionClass(new RuleSetFile);
         $this->assertCount(0, $reflect->getMethods(\ReflectionMethod::IS_PROTECTED));
-        $this->assertCount(3, $reflect->getMethods(\ReflectionMethod::IS_PUBLIC));
+        $this->assertCount(2, $reflect->getMethods(\ReflectionMethod::IS_PUBLIC));
     }
 
     /**

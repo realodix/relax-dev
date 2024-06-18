@@ -17,11 +17,6 @@ abstract class AbstractRuleSet implements RuleSetInterface
         return '@'.self::classBasename($this);
     }
 
-    public function getRules(): array
-    {
-        return $this->rules();
-    }
-
     /**
      * Get the class basename.
      */
