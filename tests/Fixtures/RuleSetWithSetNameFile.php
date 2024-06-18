@@ -6,9 +6,12 @@ use Realodix\Relax\RuleSet\AbstractRuleSet;
 
 final class RuleSetWithSetNameFile extends AbstractRuleSet
 {
-    public string $name = 'valid-rule-set';
+    public function name(): string
+    {
+        return '@CustomRuleSetName';
+    }
 
-    protected function rules(): array
+    public function rules(): array
     {
         return [];
     }
