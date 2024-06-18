@@ -31,7 +31,7 @@ final class RuleSet
     {
         $ruleSet = $this->getSetDefinitions($this->ruleSet);
         if (is_object($ruleSet)) {
-            return $ruleSet->getName();
+            return $ruleSet->name();
         }
 
         return 'Local rules';
