@@ -24,31 +24,26 @@ For more details, see PHP-CS-Fixer [documentation](https://github.com/PHP-CS-Fix
 
 ## Configuring Relax
 
-Run this command below:
-
-```sh
-./vendor/bin/relax init
-```
-
-or in your PHP CS Fixer configuration file, use the following contents:
+In your PHP CS Fixer configuration file, use the following contents:
 
 ```php
 <?php
 
 use Realodix\Relax\Config;
+use Realodix\Relax\RuleSet\Sets\Laravel;
 
-return Config::create('@Realodix');
+return Config::create(new Laravel);
 ```
 
-#### Rule Sets
+#### Presets
 
-Rule set defines a set of rules that can be used to fix code style issues in your code.
+Presets defines a set of rules that can be used to fix code style issues in your code. To use presets in your PHP code, you need to use the `Realodix\Relax\RuleSet\Sets\` namespace.
 
 | Preset                     | Description |
 | -------------------------- |-------------|
-| [`@Laravel`][rs_laravel]   | Rules that follow the official Laravel coding standards |
-| [`@Realodix`][rs_realodix] | Inherits `@Laravel` with some tweaks |
-| [`@Spatie`][rs_spatie]     | The rule set used by Spatie |
+| [`Laravel`][rs_laravel]   | Rules that follow the official Laravel coding standards |
+| [`Realodix`][rs_realodix] | Inherits `Laravel` with some tweaks |
+| [`Spatie`][rs_spatie]     | The rule set used by Spatie |
 
 
 #### Custom Fixers
@@ -83,6 +78,7 @@ In case you only need some tweaks for specific projects, which won't deserve an 
 
 use Realodix\Relax\Config;
 use Realodix\Relax\Finder;
+use Realodix\Relax\RuleSet\Sets\Laravel;
 
 // You can add or override rule set
 $localRules = [
@@ -106,7 +102,7 @@ $finder = Finder::laravel(__DIR__.'Foo')
     ->notName('*.foo.php')
     ->append(['.php-cs-fixer.dist.php']);
 
-return Config::create('@PSR2', $localRules)
+return Config::create(new Laravel, $localRules)
     ->setFinder($finder)
     ->setRiskyAllowed(false)
     ->registerCustomFixers(new \PhpCsFixerCustomFixers\CustomFixer());
@@ -141,11 +137,6 @@ use Realodix\Relax\RuleSet\AbstractRuleSet;
 
 final class MyRuleSet extends AbstractRuleSet
 {
-    /**
-     * Optionally, set the rule set name.
-     */
-    // public string $name = 'Personal CS';
-
     public function rules(): array
     {
         // ...
