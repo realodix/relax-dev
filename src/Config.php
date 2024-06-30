@@ -37,7 +37,7 @@ class Config extends PhpCsFixerConfig
     /**
      * Create a new config
      *
-     * @param null|RuleSetInterface|string $ruleSet
+     * @param null|RuleSetInterface|string $ruleSet The ruleset to use.
      * @return self
      *
      * @throws \InvalidArgumentException
