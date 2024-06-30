@@ -47,7 +47,7 @@ class Config extends PhpCsFixerConfig
     {
         if (! ($ruleSet instanceof RuleSetInterface) && ! is_string($ruleSet) && $ruleSet !== null) {
             throw new \InvalidArgumentException(
-                'Ruleset must be either a Relax RuleSetInterface, a string or null'
+                'Ruleset must be of type Relax RuleSetInterface, a string or null'
             );
         }
 
