@@ -30,17 +30,21 @@ In your PHP CS Fixer configuration file, use the following contents:
 <?php
 
 use Realodix\Relax\Config;
-use Realodix\Relax\RuleSet\Sets\Laravel;
 
-return Config::create(new Laravel);
+$localRules = [
+    // ...
+];
+
+return Config::create('Laravel')
+    ->setRules($localRules);
 ```
 
-#### Presets
+#### Rulesets
 
-Presets defines a set of rules that can be used to fix code style issues in your code. To use presets in your PHP code, you need to use the `Realodix\Relax\RuleSet\Sets\` namespace.
+A ruleset is a named list of rules that can be used to fix code style issues in your code. To use ruleset in your PHP code, you need to use the `Realodix\Relax\RuleSet\Sets\` namespace.
 
-| Preset                     | Description |
-| -------------------------- |-------------|
+| Rulesets                  | Description |
+| ------------------------- |-------------|
 | [`Laravel`][rs_laravel]   | Rules that follow the official Laravel coding standards |
 | [`Realodix`][rs_realodix] | Inherits `Laravel` with some tweaks |
 | [`Spatie`][rs_spatie]     | The rule set used by Spatie |
@@ -71,14 +75,13 @@ By default, Relax will inspect all `.php` files in your project except those in 
 
 ## Advanced Configuration
 
-In case you only need some tweaks for specific projects, which won't deserve an own rule set - you may enable or disable specific rules.
+Relax is built on top of [`PHP-CS-Fixer`][php-cs-fixer]. Therefore, you can make configurations just like you can do in PHP-CS-Fixer. For more details, see  [PHP-CS-Fixer: Config](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/blob/master/doc/config.rst) documentation and [MLocati: PHP-CS-Fixer Configurator](https://mlocati.github.io/php-cs-fixer-configurator).
 
 ```php
 <?php
 
 use Realodix\Relax\Config;
 use Realodix\Relax\Finder;
-use Realodix\Relax\RuleSet\Sets\Laravel;
 
 // You can add or override rule set
 $localRules = [
@@ -96,19 +99,19 @@ $localRules = [
     'CustomFixer/rule_2' => true,
 ];
 
-$finder = Finder::laravel(__DIR__.'Foo')
+$finder = Finder::create()
+    ->in(__DIR__)
     ->ignoreDotFiles(false)
     ->exclude(['Bar'])
     ->notName('*.foo.php')
     ->append(['.php-cs-fixer.dist.php']);
 
-return Config::create(new Laravel, $localRules)
+return Config::create('Laravel')
+    ->setRules($localRules)
     ->setFinder($finder)
     ->setRiskyAllowed(false)
     ->registerCustomFixers(new \PhpCsFixerCustomFixers\CustomFixer());
 ```
-
-Relax is built on top of [`PHP-CS-Fixer`][php-cs-fixer]. Therefore, you may use any of its rules to fix code style issues in your project. For more details, see  [PHP-CS-Fixer: Config](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/blob/master/doc/config.rst) documentation and [MLocati: PHP-CS-Fixer Configurator](https://mlocati.github.io/php-cs-fixer-configurator).
 
 If you wish to completely define rules locally without using existing rule sets, you can do that:
 
@@ -123,7 +126,8 @@ $localRules = [
     'ordered_imports' => ['sort_algorithm' => 'alpha'],
 ];
 
-return Config::create($localRules);
+return Config::create()
+    ->setRules($localRules);
 ```
 
 ## Custom Rule Set
@@ -156,7 +160,8 @@ $localRules = [
     // ...
 ];
 
-return Config::create(new MyRuleSet(), $localRules);
+return Config::create(new MyRuleSet())
+    ->setRules($localRules);
 ```
 
 ## Troubleshooting
