@@ -1,6 +1,6 @@
 # Realodix Relax
 
-![PHPVersion](https://img.shields.io/badge/PHP-%208-777BB4.svg?style=flat-square)
+![PHPVersion](https://img.shields.io/badge/PHP-7.4%20|%20%5E8.0-777BB4.svg?style=flat-square)
 ![Packagist Version (custom server)](https://img.shields.io/packagist/v/realodix/relax)
 ![Build Status](../../actions/workflows/ci.yml/badge.svg)
 
@@ -35,7 +35,7 @@ $localRules = [
     // ...
 ];
 
-return Config::create('Laravel')
+return Config::create('laravel')
     ->setRules($localRules);
 ```
 
@@ -43,11 +43,11 @@ return Config::create('Laravel')
 
 A ruleset is a named list of rules that can be used to fix code style issues in your code. To use ruleset in your PHP code, you need to use the `Realodix\Relax\RuleSet\Sets\` namespace.
 
-| Rulesets                  | Description |
+| Ruleset                   | Description |
 | ------------------------- |-------------|
-| [`Laravel`][rs_laravel]   | Rules that follow the official Laravel coding standards |
-| [`Realodix`][rs_realodix] | Inherits `Laravel` with some tweaks |
-| [`Spatie`][rs_spatie]     | The rule set used by Spatie |
+| [`laravel`][rs_laravel]   | Rules that follow the official Laravel coding standards |
+| [`realodix`][rs_realodix] | Inherits `laravel` with some tweaks |
+| [`spatie`][rs_spatie]     | The rule set used by Spatie |
 
 
 #### Custom Fixers
@@ -106,7 +106,7 @@ $finder = Finder::create()
     ->notName('*.foo.php')
     ->append(['.php-cs-fixer.dist.php']);
 
-return Config::create('Laravel')
+return Config::create('laravel')
     ->setRules($localRules)
     ->setFinder($finder)
     ->setRiskyAllowed(false)
@@ -139,8 +139,15 @@ You can easily create your own rule set by extending the [`AbstractRuleSet`](src
 
 use Realodix\Relax\RuleSet\AbstractRuleSet;
 
-final class MyRuleSet extends AbstractRuleSet
+class MyRuleSet extends AbstractRuleSet
 {
+    // This method is optional. If not implemented, Relax will use
+    // the class name itself as the ruleset name.
+    public function name(): string
+    {
+        // ...
+    }
+
     public function rules(): array
     {
         // ...

@@ -8,6 +8,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Generates the configuration file.
+ *
+ * @codeCoverageIgnore
+ */
 #[AsCommand(name: 'init')]
 class GenerateConfigCommand extends Command
 {
@@ -79,7 +84,7 @@ class GenerateConfigCommand extends Command
                 // ...
             ];
 
-            return Config::create()
+            return Config::create('realodix')
                 ->setRules($localRules);
             CODE;
 
