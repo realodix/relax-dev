@@ -4,13 +4,15 @@ use Realodix\Relax\Config;
 use Realodix\Relax\Finder;
 
 $localRules = [
-    'binary_operator_spaces' => true,
+    // ...
 ];
 
 $finder = Finder::base()
-    ->append(['.php-cs-fixer.dist.php', 'bin/relax']);
+    ->in(__DIR__)
+    ->append(['.php-cs-fixer.dist.php', 'bin/relax'])
+    ->notName('*_actual.php');
 
-return Config::create('realodix')
+return Config::create('relax')
     ->setRules($localRules)
     ->setFinder($finder)
     ->setParallelConfig(\PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
