@@ -234,9 +234,9 @@ class relax_actual extends Config
     public function control_structure__switch_case_semicolon_to_colon()
     {
         switch (true) {
-            case 1;
+            case 1:
                 break;
-            default;
+            default:
                 break;
         }
     }
@@ -471,6 +471,12 @@ with a line not prefixed with asterisk
     public function phpdoc__phpdoc_trim_consecutive_blank_line_separation($foo) {}
 
     /**
+     * @param STRING|String[] $bar
+     * @return inT[]
+     */
+    public function phpdoc__phpdoc_types($bar) {}
+
+    /**
      * @param string|int|\Foo|null $bar
      * @param \RuntimeException|CacheException $e
      */
@@ -702,6 +708,41 @@ if ($foo == true) {
     public function array_notation__whitespace_after_comma_in_array()
     {
         $sample = [1,2, 3,  4,    5];
+    }
+
+    public function control_structure__trailing_comma_in_multiline()
+    {
+        // array
+        [
+            1,
+            2
+        ];
+
+        // arguments
+        foo(
+            1,
+            2
+        );
+
+        // parameters
+        bar(
+            1,
+            2
+        );
+
+        // match
+        match (true) {
+            1 => '1',
+            2 => '2'
+        };
+
+        // after_heredoc
+        [
+            'foo',
+            <<<'EOD'
+                bar
+            EOD
+        ];
     }
 
     public function function_notation__function_declaration()

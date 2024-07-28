@@ -22,7 +22,7 @@ class relax_actual extends Config
     public function __invoke(array $type_declaration_spaces) {}
 
     public function __construct(
-        ?RuleSetInterface $ruleSet
+        ?RuleSetInterface $ruleSet,
     ) {}
 
     /**
@@ -466,6 +466,12 @@ class relax_actual extends Config
     public function phpdoc__phpdoc_trim_consecutive_blank_line_separation($foo) {}
 
     /**
+     * @param string|string[] $bar
+     * @return int[]
+     */
+    public function phpdoc__phpdoc_types($bar) {}
+
+    /**
      * @param null|string|int|\Foo             $bar
      * @param \RuntimeException|CacheException $e
      */
@@ -642,7 +648,7 @@ class relax_actual extends Config
 
         // parenthesis_brace_block
         $foo = is_string(
-            'foo'
+            'foo',
         );
 
         // square_brace_block
@@ -682,6 +688,41 @@ class relax_actual extends Config
         $sample = [1, 2, 3, 4, 5];
     }
 
+    public function control_structure__trailing_comma_in_multiline()
+    {
+        // array
+        [
+            1,
+            2,
+        ];
+
+        // arguments
+        foo(
+            1,
+            2,
+        );
+
+        // parameters
+        bar(
+            1,
+            2,
+        );
+
+        // match
+        match (true) {
+            1 => '1',
+            2 => '2',
+        };
+
+        // after_heredoc
+        [
+            'foo',
+            <<<'EOD'
+                bar
+            EOD,
+        ];
+    }
+
     public function function_notation__function_declaration()
     {
         // closure_fn_spacing
@@ -703,11 +744,11 @@ class relax_actual extends Config
         function sample2(
             $a = 10,
             $b = 20,
-            $c = 30
+            $c = 30,
         ) {}
         sample2(
             1,
-            2
+            2,
         );
 
         // 'after_heredoc' => true
@@ -715,7 +756,7 @@ class relax_actual extends Config
             <<<'EOD'
         foo
         EOD,
-            'bar'
+            'bar',
         );
 
         // Default value
